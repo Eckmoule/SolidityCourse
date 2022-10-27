@@ -34,7 +34,7 @@ contract FundMe {
         //require will reject the call if not ok. It will return the gas that has not been use (with the computation after the require keyword)
         require(msg.value.getConversionRate() >= minimumUSD, "Didn't send enough !");
         funders.push(msg.sender);
-        addressToAmountFound[msg.sender] = msg.value;
+        addressToAmountFound[msg.sender] += msg.value;
     }
 
     // Withdraw everything and can only be use by the owner (the one that publish the contract). 
