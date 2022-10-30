@@ -3,6 +3,8 @@ pragma solidity ^0.8.0;
 
 import "./PriceConverter.sol";
 
+error NotOwner();
+
 contract FundMe {
     
     // This make the function of ProceConverter callable on uint256 (like myUint.getConversioRate())
@@ -18,7 +20,9 @@ contract FundMe {
 
     // Modifier create keyword that you can use on function declaration
     modifier onlyOwner {
-        require(msg.sender == i_owner, "Sender is not owner");
+        //require(msg.sender == i_owner, "Sender is not owner");
+        // Using customer error save gas (you don't have to store the message). 
+         if (msg.sender != i_owner) revert NotOwner();
         // This means "doing the rest of the code". It can be put before or after the code that we insert with modifier. 
         _;
     }
@@ -27,6 +31,16 @@ contract FundMe {
         // Setup the owner has the address who deploy the contract. 
         // It will be the only address that can withdraw the fund. 
         i_owner = msg.sender;
+    }
+
+    // Receive is a special function that will tricker when the contract directly receive coins. 
+    receive() external payable {
+        fund();
+    }
+
+    // fallback is a special function that will tricker when data are send to the contract 
+    fallback() external payable {
+        fund();
     }
 
     // payable indiquate that you can send native token with the transaction 
