@@ -1,8 +1,15 @@
 pragma solidity ^0.4.19;
 
 import "./ownable.sol";
+import "./SafeMath.sol";
 
 contract ZombieFactory is Ownable {
+
+    // Une librairie permet entre autre de rajouter des fonction a un type de données (ici uint256)
+    using SafeMath for uint256;
+    using SafeMath32 for uint32; 
+    using SafeMath16 for uint16;
+
 
     // Permet de déclencher un évenement dans le front-end
     event NewZombie(uint zombieId, string name, uint dna);
@@ -31,9 +38,9 @@ contract ZombieFactory is Ownable {
 
     // le mot clef internal permet l'appel depuis les classes filles contrairement à private. 
     function _createZombie(string _name, uint _dna) internal {
-        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+        uint id = zombies.push(Zombie(_name, _dna)) - 1;
         zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
+        ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
         NewZombie(id, _name, _dna);
     }
 
