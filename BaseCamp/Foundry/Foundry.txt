@@ -1,0 +1,17 @@
+Installer starknet foundry https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
+
+Créer un projet
+> snforge --init project_name
+
+Dans un projet créer un class (mod) avec des fonction de test
+mod tests{
+
+    #[test]
+    #[available_gas(100000)]
+    fn unit_test() {
+        assert(1 ==1, 'Not equal')
+    }
+}
+
+Pour lancer les tests
+> scarb test

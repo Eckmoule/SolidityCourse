@@ -1,0 +1,28 @@
+Lancer powershell 
+Dans un terminal lancer WSL puis katana (katana est un sequencer en localhost)
+Dans un second terminal se positionner dans le dossier contenant le .env 
+> source .env 
+Permet de charger les variables d'environnement 
+> echo $VARIABLE_NAME 
+Permet de vérifier qu'une variable est chargé 
+> starkli declare --account /mnt/c/Code/BaseCamp/demo/katana_account.json --rpc http://0.0.0.0:5050 ./target/dev/demo_ownable.sierra.json
+Le chemin par défaut vers account ne fonctionne pas je ne sais pas pourquoi. 
+On passe le chemin vers le fichier compilé (pour compiler scarb build est la commande) 
+Cela déclare le code sur la blockchain. Ensuite il faut le déployer 
+> starkli deploy --account /mnt/c/Code/BaseCamp/demo/katana_account.json 0x0316912370d7d607257e422336b7d77f897981de5fd643b1b6e6e7729bfc67a5
+Le class hash (derniere information) est fourni lors du declare. 
+On peut également passer les arguments pour le constructeur si nécessaire (ici 1)
+> starkli deploy --account /mnt/c/Code/BaseCamp/demo/katana_account.json 0x0316912370d7d607257e422336b7d77f897981de5fd643b1b6e6e7729bfc67a5 1
+
+ON peut ensuite interagir avec le contrat 
+> starkli call 0x072f36c2a0bfe73c05f105e183e131dd73c7130a9ff81826ccbe223a7a61fafa owner
+Le premier paramètre est l'address du contrat (donné par deploy) et le second est la méthode. 
+call permet d'appeler des vue (read only) qui ne coute pas de gas. 
+
+> starkli invoke  --account /mnt/c/Code/BaseCamp/demo/katana_account.json 0x000c58f1782c2abceadfa0fce70a3deeb0a493afa9efb7f13ddac6d9ffa21af3 set_data 123
+Permet d'appeler une transaction (écriture)
+
+> starkli parse-cairo-string XXXXXXXX
+Permer de décoder les chaine de caractère notament pour les erreurs rendus par starknet
+
+D'ou vient le mot de passe sur le keystore ? 
