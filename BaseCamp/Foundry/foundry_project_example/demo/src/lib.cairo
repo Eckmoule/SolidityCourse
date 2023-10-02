@@ -107,34 +107,3 @@ mod ownable {
         }
     }
 }
-
-#[cfg(test)]
-mod tests{
-
-    use demo::ownable;
-    use demo::{OwnableTraitDispatcher, OwnableTraitDispatcherTrait};
-    use starknet::{ContractAddress, Into, TryInto, OptionTrait};
-    use starknet::syscalls::deploy_syscall;
-    use result::ResultTrait;
-    use array::{ArrayTrait, SpanTrait};
-    
-
-    #[test]
-    #[available_gas(100000)]
-    fn basic_test() {
-        assert(1 ==1, 'Not equal')
-    }
-
-    #[test]
-    #[available_gas(100000)]
-    fn constructor_test() {
-        // On utilise une chaine de charatere lisible pour mieux comprendre ce que l'on fait. 
-       let admin_address: ContractAddress = 'admin'.try_into().unwrap();
-       // Création d'un tableau 
-       let mut calldata = array![admin_address.into()];
-       // On déploi le contrat
-       let (address0, _) = deploy_syscall(ownable::TEST_CLASS_HASH.try_into().unwrap(), 0, calldata.span(), false).unwrap();
-       
-
-    }
-}

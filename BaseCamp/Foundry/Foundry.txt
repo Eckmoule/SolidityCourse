@@ -1,7 +1,7 @@
-Installer starknet foundry https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
 
-Créer un projet
-> snforge --init project_name
+--------- Tests de base -------------
+
+Example : basic_project_example
 
 Dans un projet créer un class (mod) avec des fonction de test
 mod tests{
@@ -15,3 +15,27 @@ mod tests{
 
 Pour lancer les tests
 > scarb test
+
+------ FOUNDRY ---------
+
+Example : foundry_project_example
+
+Installer starknet foundry https://foundry-rs.github.io/starknet-foundry/getting-started/installation.html
+
+Créer un projet
+> snforge --init project_name
+
+Si on part d'un projet non foundry il faut ajouter les lignes suivantes dans le Scarb.toml
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.7.1" }
+casm = true
+
+On créer un dossier tests
+On écrit les tests à l'intérieur 
+
+> snforge 
+
+On peut utiliser des "cheat code" qui permette de changer l'appelant ou le numéro de block par exemple
+https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html
+
+
+
