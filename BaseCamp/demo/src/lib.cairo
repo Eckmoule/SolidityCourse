@@ -100,6 +100,7 @@ mod ownable {
     // fn owner_only_private(self: @ContractState) {
     //     assert(1 == 1,  'Invalid owner');
     // }
+    
 
     #[generate_trait] // Cela permet de ne pas déclarer le trait (cool pour les fonctions privées)
     impl PrivateMethods of PrivateMethodsTrait { // Permet de s'assurer que le contenu est privé. 

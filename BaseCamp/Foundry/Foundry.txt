@@ -36,6 +36,9 @@ On écrit les tests à l'intérieur
 
 On peut utiliser des "cheat code" qui permette de changer l'appelant ou le numéro de block par exemple
 https://foundry-rs.github.io/starknet-foundry/appendix/cheatcodes.html
+start_prank permet de se faire passer pour une address pour les appels (stop_prank arrete cela)
+start_mock_call permet de mocker le retour d'une fonction (stop_mock_call arrete cela)
 
-
+On peut également lancer des test de type fuzz (les variables seront automatiquement générés aléatoirement)
+Pour cela on passe les variables en paramètre de la fonction de test (ne marche qu'avec les felt pour l'instant)
 
