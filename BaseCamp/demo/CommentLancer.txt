@@ -4,11 +4,15 @@ Dans un second terminal se positionner dans le dossier contenant le .env
 > source .env 
 Permet de charger les variables d'environnement 
 > echo $VARIABLE_NAME 
-Permet de vérifier qu'une variable est chargé 
+Permet de vérifier qu'une variable est chargé
+
+Il faut compiler le projet pour obtenir les fichiers .json (scarb build)
+
 > starkli declare --account /mnt/c/Code/BaseCamp/demo/katana_account.json --rpc http://0.0.0.0:5050 ./target/dev/demo_ownable.sierra.json
 Le chemin par défaut vers account ne fonctionne pas je ne sais pas pourquoi. 
-On passe le chemin vers le fichier compilé (pour compiler scarb build est la commande) 
+On passe le chemin vers le fichier compilé (pour compiler scarb build est la commande, scarb new pour créer le projet) 
 Cela déclare le code sur la blockchain. Ensuite il faut le déployer 
+
 > starkli deploy --account /mnt/c/Code/BaseCamp/demo/katana_account.json 0x0316912370d7d607257e422336b7d77f897981de5fd643b1b6e6e7729bfc67a5
 Le class hash (derniere information) est fourni lors du declare. 
 On peut également passer les arguments pour le constructeur si nécessaire (ici 1)
@@ -25,4 +29,7 @@ Permet d'appeler une transaction (écriture)
 > starkli parse-cairo-string XXXXXXXX
 Permer de décoder les chaine de caractère notament pour les erreurs rendus par starknet
 
-D'ou vient le mot de passe sur le keystore ? 
+Pour générer les fichiers account.json & key.json a partir de ArgentX : 
+> starkli account fetch <ACCOUNT_ADDRESS> --network goerli-1 --output /path/to/my_account.json
+> starkli signer keystore from-key /path/to/my_key.json.
+
